@@ -17,8 +17,8 @@ const rethinkSans = Rethink_Sans({
 });
 
 export const metadata: Metadata = {
-  title: "CDP Next.js StarterKit",
-  description: "The CDP Next.js StarterKit",
+  title: "VibePay Monitors - E-ink Payment Displays",
+  description: "Professional e-ink displays for real-time payment monitoring on Coinbase Commerce",
 };
 
 /**

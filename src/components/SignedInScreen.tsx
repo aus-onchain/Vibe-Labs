@@ -7,6 +7,7 @@ import { baseSepolia } from "viem/chains";
 
 import EOATransaction from "./EOATransaction";
 import Header from "./Header";
+import PaymentLinkTest from "./PaymentLinkTest";
 import UserBalance from "./UserBalance";
 
 /**
@@ -60,6 +61,9 @@ export default function SignedInScreen() {
             {isSignedIn && evmAddress && (
               <EOATransaction balance={formattedBalance} onSuccess={getBalance} />
             )}
+          </div>
+          <div className="card">
+            <PaymentLinkTest />
           </div>
         </div>
       </main>
