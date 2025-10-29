@@ -24,12 +24,7 @@ function generateCoinbaseJWT(
   requestPath: string
 ): string {
   const uri = `${requestMethod} ${requestHost}${requestPath}`;
-
-  // Only replace literal \n if they exist (for local env files)
-  // Vercel env vars might already have actual newlines
-  const formattedKey = keySecret.includes('\\n') 
-    ? keySecret.replace(/\\n/g, '\n')
-    : keySecret;
+  const formattedKey = keySecret.replace(/\\n/g, '\n');
 
   // @ts-expect-error - jsonwebtoken types don't support custom header properties but they work at runtime
   const token = sign(
