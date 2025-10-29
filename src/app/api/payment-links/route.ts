@@ -32,7 +32,7 @@ function generateCoinbaseJWT(
   console.log('[JWT] Key format check - contains newlines:', formattedKey.includes('\n'));
 
   // @ts-expect-error - jsonwebtoken types don't support custom header properties but they work at runtime
-  const token = sign(
+  const token: string = sign(
     {
       iss: 'cdp',
       nbf: Math.floor(Date.now() / 1000),
