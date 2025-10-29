@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { Product, CartItem } from '@/types/products';
 import { products } from '@/data/products';
 import ProductCarousel from './ProductCarousel';
@@ -86,7 +86,15 @@ export default function Shop() {
       };
 
       // Coinbase requires HTTPS for redirect URLs, so skip them on localhost
-      const requestBody: any = {
+      const requestBody: {
+        amount: number;
+        currency: string;
+        network: string;
+        description: string;
+        metadata: Record<string, string>;
+        successRedirectUrl?: string;
+        failRedirectUrl?: string;
+      } = {
         amount: total,
         currency: 'USDC',
         network: 'base',

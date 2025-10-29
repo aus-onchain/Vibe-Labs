@@ -3,8 +3,6 @@
  * Implements EdDSA (Ed25519) signing for API requests
  */
 
-import { createHash } from 'crypto';
-
 /**
  * Base64 URL encode a string or Uint8Array
  */

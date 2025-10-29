@@ -2,6 +2,17 @@ import { NextRequest, NextResponse } from 'next/server';
 import { sign } from 'jsonwebtoken';
 import crypto from 'crypto';
 
+interface PaymentLinkData {
+  amount: string;
+  currency: string;
+  network: string;
+  description: string;
+  expiresAt: string;
+  metadata: Record<string, unknown>;
+  successRedirectUrl?: string;
+  failRedirectUrl?: string;
+}
+
 /**
  * Generate JWT using Coinbase's official method
  */
@@ -12,10 +23,10 @@ function generateCoinbaseJWT(
   requestHost: string,
   requestPath: string
 ): string {
-  const algorithm = 'ES256';
   const uri = `${requestMethod} ${requestHost}${requestPath}`;
   const formattedKey = keySecret.replace(/\\n/g, '\n');
 
+  // @ts-expect-error - jsonwebtoken types don't support custom header properties but they work at runtime
   const token = sign(
     {
       iss: 'cdp',
@@ -26,8 +37,9 @@ function generateCoinbaseJWT(
     },
     formattedKey,
     {
-      algorithm: algorithm as any,
+      algorithm: 'ES256',
       header: {
+        alg: 'ES256',
         kid: keyName,
         nonce: crypto.randomBytes(16).toString('hex'),
       },
@@ -69,7 +81,7 @@ export async function POST(request: NextRequest) {
       requestPath
     );
 
-    const paymentLinkData: any = {
+    const paymentLinkData: PaymentLinkData = {
       amount: amount.toString(),
       currency: currency || 'USDC',
       network: network || 'base',

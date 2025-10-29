@@ -28,7 +28,7 @@ export default function PaymentSuccess() {
             Thank you for your purchase. Your VibePay Monitor order has been confirmed.
           </p>
           <p className="result-submessage">
-            You'll receive a confirmation email shortly with shipping details.
+            You&apos;ll receive a confirmation email shortly with shipping details.
           </p>
           
           <button 
